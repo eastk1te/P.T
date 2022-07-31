@@ -1,0 +1,179 @@
+<html>
+    <head>
+        <title>실습_시간표</title>
+        <style>
+            #caption{
+                font-size: 100px;
+                font-style: oblique;
+                color: chocolate;
+                background-color: lightgreen;
+                border-bottom: 2px solid black;
+                border-right: 2px solid black;
+                border-top: 2px solid black;
+                border-left: 2px solid black;
+            }
+            body{
+                background-image: url('data:image/jpeg;base64,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');
+                background-repeat: no-repeat;
+                background-size: 100%;
+                padding-left: 35px;
+                padding-top: 29px;
+            }
+            table, th {
+                border-bottom: 3px solid black;
+                border-right: 3px solid black;
+                border-top: 2px solid black;
+                border-left: 2px solid black;
+            }
+            th{
+                background-color: darkgreen;
+            }
+            th:hover{
+                background-color: greenyellow;
+            }
+        </style>
+    </head>
+    <body>
+        <table border='1'>
+            <caption id='caption'>시간표</caption>
+            <thead>
+                <tr>
+                    <th rowspan=2>교시</th>
+                    <th colspan=5>요일</th>
+                </tr>
+                <tr>
+                    <th>월</th>
+                    <th>화</th>
+                    <th>수</th>
+                    <th>목</th>
+                    <th>금</th>
+                </tr>
+                <tr>
+                    <th rowspan=2>1교시</th>
+                    <th rowspan=3>통계수학1</th>
+                    <th rowspan=2>*</th>
+                    <th rowspan=4>표본론및실습</th>
+                    <th rowspan=3>통계수학1</th>
+                    <th rowspan=2>*</th>
+                </tr>
+                <tr>
+
+
+
+
+
+                </tr>
+                <tr>
+                    <th rowspan=2>2교시</th>
+
+                    <th rowspan=2>*</th>
+
+
+                    <th rowspan=2>*</th>
+                </tr>
+                <tr>
+                    <th>*</th>
+
+                    <th>*</th>
+
+                </tr>
+                <tr>
+                    <th rowspan=2>3교시</th>
+                    <th rowspan=4>통계소프트웨어및실습</th>
+                    <th rowspan=4>회귀분석및실습</th>
+                    <th rowspan=4>회귀분석및실습</th>
+                    <th rowspan=4>통계소프트웨어및실습</th>
+                    <th rowspan=2>*</th>
+                </tr>
+                <tr>
+
+
+
+
+
+                </tr>
+                <tr>
+                    <th rowspan=2>4교시</th>
+
+
+
+
+                    <th rowspan=2>*</th>
+                </tr>
+                <tr>
+
+
+
+
+
+                </tr>
+                <tr>
+                    <th rowspan=2>5교시</th>
+                    <th rowspan=2>*</th>
+                    <th rowspan=2>*</th>
+                    <th rowspan=2>*</th>
+                    <th rowspan=2>*</th>
+                    <th rowspan=2>*</th>
+                </tr>
+                <tr>
+                </tr>
+                <tr>
+                    <th rowspan=2>6교시</th>
+                    <th rowspan=2>*</th>
+                    <th rowspan=4>통계데이터마이닝및실습</th>
+                    <th rowspan=4>통계데이터마이닝및실습</th>
+                    <th rowspan=2>*</th>
+                    <th rowspan=2>*</th>
+                </tr>
+                <tr>
+
+
+
+
+
+                </tr>
+                <tr>
+                    <th rowspan=2>7교시</th>
+                    <th rowspan=3>확률론</th>
+
+
+                    <th rowspan=3>확률론</th>
+                    <th rowspan=2>*</th>
+                </tr>
+                <tr>
+
+
+
+
+
+                </tr>
+                <tr>
+                    <th rowspan=2>8교시</th>
+
+                    <th rowspan=4>표본론및실습</th>
+                    <th rowspan=2>*</th>
+                    <th rowspan=2>*</th>
+                </tr>
+                <tr>
+                    <th> *</th>
+
+                    <th> *</th>
+
+
+                </tr>
+                <tr>
+                    <th rowspan=2>9교시</th>
+                    <th rowspan=2>*</th>
+
+                    <th rowspan=2>*</th>
+                    <th rowspan=2>*</th>
+                    <th rowspan=2>*</th>
+                </tr>
+                <tr>
+
+
+                </tr>
+            </thead>
+        </table>
+    </body>
+</html>

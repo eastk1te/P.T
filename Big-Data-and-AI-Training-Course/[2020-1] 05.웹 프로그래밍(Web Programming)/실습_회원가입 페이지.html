@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>실습_회원가입 페이지</title>
+        <style>
+            #h1 {
+                background-color: whitesmoke;
+                margin: 60px 20px 40px 20px;
+                font-style:initial;
+                font-size: 50px;
+                text-align:center;
+            }
+            .filed{
+                margin: 0px 20px 0px 20px;
+                background-color: oldlace;
+            }
+            .legend {
+                text-align:center;
+                background-color: moccasin;
+            }
+            .id{
+                margin-left: 50px;
+                margin-bottom: 20px;
+                background-color: lavender;
+            }
+            .id:hover{
+                background-color: lawngreen;
+                text-decoration: underline;
+            }
+            .email:hover{
+                background-color: olive;
+            }
+            .list:hover{
+                background-color: olive;
+            }
+            .password:hover{
+                background-color: olive;
+            }
+            .pw{
+                margin-left: 50px;
+                background-color: lavender;
+            }
+            .pw:hover{
+                background-color: lawngreen;
+                text-decoration: underline;
+            }
+            .button{
+                margin-left: 700px;
+                background-color: orchid;
+            }
+            .button:hover{
+                background-color: magenta;
+            }
+            body{
+                background-color: ivory;
+            }
+        </style>
+    </head>
+    <body>
+        <form action=''><!--안 배워서 잘 모르겠음-->
+            <h1 id='h1'>회원가입 페이지</h1><br>
+            <fieldset class='filed'>
+                <legend class='legend'>회원가입 창</legend>
+                <div class='id'>
+                    <label for='name'>ID:</label>
+                    <input type='text' name='name' placeholder="e-mail"  srequired class='email'>
+                    @
+                    <input list='웹 사이트' class='list'>
+                    <datalist id = '웹 사이트'>
+                        <option value='naver.com'></option>
+                        <option value='gmail.com'></option>
+                        <option value='daum.net'></option>
+                    </datalist><br>
+                </div>
+                <div class='pw'>
+                    <label type='affiliation'>비밀번호 : </label>
+                    <input type='password' name = 'password'  placeholder="숫자로 10칸"  srequired pattern='[0-9]{10}' class='password'><br />
+                </div>
+                <br>
+                <input type='submit' value='회원가입' class='button'>
+            </fieldset>
+        </form>
+    </body>
+</html>
