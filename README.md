@@ -1,3 +1,7 @@
+# MEMO.
+ - Gitblog post : https://honbabzone.com/jekyll/start-gitHubBlog/
+ 
+ 
 # Personal_training
 - [BOJ]백준 단계별 문제풀이.
 <!---
