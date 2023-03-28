@@ -1,0 +1,1 @@
+MAB 기법(https://assaeunji.github.io/bayesian/2021-01-30-mab/)
