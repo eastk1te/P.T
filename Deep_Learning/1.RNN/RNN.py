@@ -1,6 +1,6 @@
 import numpy as np
 
-class SimpleRNN:
+class RNN:
 
     def __init__(self, input_size, hidden_size, output_size):
         self.input_size = input_size
@@ -8,12 +8,12 @@ class SimpleRNN:
         self.output_size = output_size
         
         # 가중치 초기화
-        self.W_hh = np.random.randn(hidden_size, hidden_size)
-        self.W_hx = np.random.randn(hidden_size, input_size)
-        self.W_yh = np.random.randn(output_size, hidden_size)
+        self.W_h = np.random.randn(hidden_size, hidden_size)
+        self.W_x = np.random.randn(hidden_size, input_size)
+        self.W_y = np.random.randn(output_size, hidden_size)
         
         # 편향 초기화
-        self.b_h = np.random.randn(hidden_size, 1)
+        self.b_x = np.random.randn(hidden_size, 1)
         self.b_y = np.random.randn(output_size, 1)
 
         self.h_prev = np.zeros((self.hidden_size, 1))
@@ -21,36 +21,37 @@ class SimpleRNN:
     def forward(self, x):
 
         # 순전파 계산
-        self.h = np.tanh(np.dot(self.W_hh, self.h_prev) + np.dot(self.W_hx, x) + self.b_h)
+        self.h = np.tanh(np.dot(self.W_h, self.h_prev) + np.dot(self.W_x, x) + self.b_x)
 
-        self.y = self.softmax(np.dot(self.W_yh, self.h) + self.b_y) 
+        self.a = np.dot(self.W_y, self.h) + self.b_y
         
-        return self.y
+        return self.a
     
     def backward(self, x, target, learning_rate):
-        # loss function
-        loss = self.MSE(self.y, target)
+        # metrics
+        metrics = self.MSE(self.a, target)
 
-        # 손실에 대한 기울기 계산
-        dy = self.y - target # explicit error signal
-        dW_yh = np.dot(dy, self.h.T)
-        db_y = dy
+        # Figure 3의 왼쪽 점선 박스
+        da = self.a - target 
+        dW_y = np.dot(da, self.h.T)
+        db_y = da
+        dh = np.dot(self.W_y.T, da)
 
-        dh = np.dot(self.W_yh.T, dy)
+        # Figure 4
         dtanh = dh * (1 - self.h ** 2) 
 
-        dW_hh = np.dot(dtanh, self.h_prev.T)
-        dW_hx = np.dot(dtanh, x.T)
-        db_h = dtanh
+        dW_h = np.dot(dtanh, self.h_prev.T)
+        dW_x = np.dot(dtanh, x.T)
+        db_x = dtanh
        
-        # 가중치와 편향 업데이트
-        self.W_hh -= learning_rate * dW_hh
-        self.W_hx -= learning_rate * dW_hx
-        self.W_yh -= learning_rate * dW_yh
-        self.b_h -= learning_rate * db_h
+        # 가중치 업데이트
+        self.W_h -= learning_rate * dW_h
+        self.W_x -= learning_rate * dW_x
+        self.W_y -= learning_rate * dW_y
+        self.b_x -= learning_rate * db_x
         self.b_y -= learning_rate * db_y
         
-        return loss
+        return metrics
     
     def MSE(self, x, y):
         return np.mean((x-y)**2)
@@ -88,14 +89,14 @@ if __name__ == '__main__':
     num_epochs = 1000
 
     # SimpleRNN 모델 초기화
-    model = SimpleRNN(sequence_length, hidden_size, sequence_length)
+    model = RNN(sequence_length, hidden_size, sequence_length)
 
     # 학습 시작
     for epoch in range(1, num_epochs+1):
         # 입력 데이터와 타깃 데이터 생성
         X, Y = generate_data(sequence_length)
         
-        # 순전파 및 역전파
+        # 순전파 및 역전파를 번갈아 수행하는 BPTT 알고리즘.
         y_pred = model.forward(X)
         loss = model.backward(X, Y, learning_rate)
         

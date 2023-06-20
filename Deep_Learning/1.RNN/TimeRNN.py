@@ -1,4 +1,5 @@
 import numpy as np
+from RNN import RNN
 
 class TimeRNN:
 
@@ -58,4 +59,3 @@ class TimeRNN:
     self.dh = dh
 
     return dinput
-     
